@@ -20,7 +20,6 @@ const AddCourse = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // Update image preview if it's a URL
     if (name === 'image' && value) {
       setImagePreview(value);
     }
@@ -38,16 +37,34 @@ const AddCourse = () => {
     }
   };
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.currentTarget.style.borderColor = '#E5E0E0';
+    e.currentTarget.style.backgroundColor = '#FAFAF9';
+
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader. onloadend = () => {
+        setImagePreview(reader. result);
+        setFormData({ ...formData, image: reader. result });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      toast.error('Please drop an image file');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name.trim()) {
+    if (!formData.name. trim()) {
       toast.error('Course name is required');
       return;
     }
 
     if (!formData.description.trim()) {
-      toast.error('Course description is required');
+      toast. error('Course description is required');
       return;
     }
 
@@ -55,7 +72,7 @@ const AddCourse = () => {
 
     try {
       await api.post('/courses', formData);
-      toast.success('Course added successfully! 🎉');
+      toast.success('Course added successfully!  🎉');
       setTimeout(() => {
         navigate('/admin/courses');
       }, 1500);
@@ -69,7 +86,6 @@ const AddCourse = () => {
     <DashboardLayout>
       <ToastContainer position="top-right" autoClose={3000} theme="light" />
 
-      {/* Page Header */}
       <div className="mb-8 flex items-center gap-4">
         <button
           onClick={() => navigate('/admin/courses')}
@@ -86,17 +102,12 @@ const AddCourse = () => {
         </div>
       </div>
 
-      {/* Main Form Container */}
       <div className="max-w-3xl">
         <div className="rounded-xl border-2 shadow-md overflow-hidden" style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E0E0' }}>
           <form onSubmit={handleSubmit} className="p-4 sm:p-6 md:p-8 space-y-6">
             
-            {/* Course Name */}
             <div>
-              <label
-                className="block text-sm font-bold mb-2"
-                style={{ color: '#3B2F2F' }}
-              >
+              <label className="block text-sm font-bold mb-2" style={{ color: '#3B2F2F' }}>
                 Course Name *
               </label>
               <input
@@ -104,35 +115,24 @@ const AddCourse = () => {
                 name="name"
                 required
                 className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors text-sm md:text-base"
-                style={{
-                  borderColor: '#E5E0E0',
-                  color: '#3B2F2F',
-                }}
+                style={{ borderColor: '#E5E0E0', color: '#3B2F2F' }}
                 placeholder="e.g., Advanced React Patterns"
                 value={formData.name}
                 onChange={handleInputChange}
                 onFocus={(e) => (e.target.style.borderColor = '#3B2F2F')}
-                onBlur={(e) => (e.target.style.borderColor = '#E5E0E0')}
+                onBlur={(e) => (e.target. style.borderColor = '#E5E0E0')}
               />
             </div>
 
-            {/* Level Selection */}
             <div>
-              <label
-                className="block text-sm font-bold mb-2"
-                style={{ color: '#3B2F2F' }}
-              >
+              <label className="block text-sm font-bold mb-2" style={{ color: '#3B2F2F' }}>
                 Difficulty Level *
               </label>
               <select
                 name="level"
                 required
                 className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors text-sm md:text-base"
-                style={{
-                  borderColor: '#E5E0E0',
-                  color: '#3B2F2F',
-                  backgroundColor: '#FFFFFF',
-                }}
+                style={{ borderColor: '#E5E0E0', color: '#3B2F2F', backgroundColor: '#FFFFFF' }}
                 value={formData.level}
                 onChange={handleInputChange}
                 onFocus={(e) => (e.target.style.borderColor = '#3B2F2F')}
@@ -144,12 +144,8 @@ const AddCourse = () => {
               </select>
             </div>
 
-            {/* Description */}
             <div>
-              <label
-                className="block text-sm font-bold mb-2"
-                style={{ color: '#3B2F2F' }}
-              >
+              <label className="block text-sm font-bold mb-2" style={{ color: '#3B2F2F' }}>
                 Course Description *
               </label>
               <textarea
@@ -157,42 +153,30 @@ const AddCourse = () => {
                 required
                 rows={5}
                 className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors text-sm md:text-base resize-none"
-                style={{
-                  borderColor: '#E5E0E0',
-                  color: '#3B2F2F',
-                }}
+                style={{ borderColor: '#E5E0E0', color: '#3B2F2F' }}
                 placeholder="Describe what students will learn in this course..."
                 value={formData.description}
                 onChange={handleInputChange}
-                onFocus={(e) => (e.target.style.borderColor = '#3B2F2F')}
-                onBlur={(e) => (e.target.style.borderColor = '#E5E0E0')}
+                onFocus={(e) => (e. target.style.borderColor = '#3B2F2F')}
+                onBlur={(e) => (e.target.style. borderColor = '#E5E0E0')}
               />
             </div>
 
-            {/* Image Upload */}
             <div>
-              <label
-                className="block text-sm font-bold mb-2"
-                style={{ color: '#3B2F2F' }}
-              >
+              <label className="block text-sm font-bold mb-2" style={{ color: '#3B2F2F' }}>
                 Course Image
               </label>
 
-              {/* Image Preview */}
               {imagePreview && (
                 <div className="mb-4 rounded-lg overflow-hidden shadow-md">
-                  <img
-                    src={imagePreview}
-                    alt="Preview"
-                    className="w-full h-48 object-cover"
-                  />
+                  <img src={imagePreview} alt="Preview" className="w-full h-48 object-cover" />
                 </div>
               )}
 
-              {/* Upload Area */}
               <div
-                className="border-2 border-dashed rounded-lg p-6 sm:p-8 text-center hover:shadow-md transition-all cursor-pointer relative"
+                className="border-2 border-dashed rounded-lg p-6 sm:p-8 text-center hover:shadow-md transition-all cursor-pointer"
                 style={{ borderColor: '#E5E0E0', backgroundColor: '#FAFAF9' }}
+                onClick={() => document.getElementById('file-input').click()}
                 onDragOver={(e) => {
                   e.preventDefault();
                   e.currentTarget.style.borderColor = '#3B2F2F';
@@ -202,58 +186,46 @@ const AddCourse = () => {
                   e.currentTarget.style.borderColor = '#E5E0E0';
                   e.currentTarget.style.backgroundColor = '#FAFAF9';
                 }}
+                onDrop={handleDrop}
               >
-                <FiUpload
-                  className="mx-auto text-5xl mb-3"
-                  style={{ color: '#D1BAB0' }}
-                />
+                <FiUpload className="mx-auto text-5xl mb-3" style={{ color: '#D1BAB0' }} />
                 <p className="font-semibold mb-1" style={{ color: '#3B2F2F' }}>
                   Click to upload or drag and drop
                 </p>
-                <p className="text-sm text-gray-500 mb-4">
-                  PNG, JPG, GIF up to 10MB
-                </p>
+                <p className="text-sm text-gray-500 mb-4">PNG, JPG, GIF up to 10MB</p>
                 <input
+                  id="file-input"
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
-                  className="hidden absolute inset-0 opacity-0 cursor-pointer"
+                  className="hidden"
                 />
               </div>
 
-              {/* URL Input */}
               <div className="mt-4">
                 <p className="text-xs text-gray-600 mb-2">Or paste image URL:</p>
                 <input
                   type="url"
                   name="image"
                   className="w-full px-4 py-2 border-2 rounded-lg focus:outline-none transition-colors text-sm"
-                  style={{
-                    borderColor: '#E5E0E0',
-                    color: '#3B2F2F',
-                  }}
-                  placeholder="https://example.com/image.jpg"
+                  style={{ borderColor: '#E5E0E0', color: '#3B2F2F' }}
+                  placeholder="https://example. com/image.jpg"
                   value={formData.image}
                   onChange={handleInputChange}
-                  onFocus={(e) => (e.target.style.borderColor = '#3B2F2F')}
+                  onFocus={(e) => (e.target. style.borderColor = '#3B2F2F')}
                   onBlur={(e) => (e.target.style.borderColor = '#E5E0E0')}
                 />
               </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t-2" style={{ borderColor: '#E5E0E0' }}>
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-bold text-white transition-all hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-bold text-white transition-all hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ backgroundColor: loading ? '#999999' : '#3B2F2F' }}
-                onMouseEnter={(e) => {
-                  if (!loading) e.target.style.opacity = '0.9';
-                }}
-                onMouseLeave={(e) => {
-                  if (!loading) e.target.style.opacity = '1';
-                }}
+                onMouseEnter={(e) => { if (! loading) e.target.style.opacity = '0.9'; }}
+                onMouseLeave={(e) => { if (!loading) e. target.style.opacity = '1'; }}
               >
                 <FiCheck size={20} />
                 <span>{loading ? 'Creating Course...' : 'Create Course'}</span>
@@ -262,12 +234,9 @@ const AddCourse = () => {
                 type="button"
                 onClick={() => navigate('/admin/courses')}
                 className="flex-1 py-3 px-4 rounded-lg font-bold transition-all hover:shadow-md text-sm md:text-base"
-                style={{
-                  backgroundColor: '#F3F0F0',
-                  color: '#3B2F2F',
-                }}
+                style={{ backgroundColor: '#F3F0F0', color: '#3B2F2F' }}
                 onMouseEnter={(e) => (e.target.style.backgroundColor = '#E5E0E0')}
-                onMouseLeave={(e) => (e.target.style.backgroundColor = '#F3F0F0')}
+                onMouseLeave={(e) => (e.target.style. backgroundColor = '#F3F0F0')}
               >
                 Cancel
               </button>

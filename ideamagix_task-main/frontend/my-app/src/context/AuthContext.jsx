@@ -22,7 +22,9 @@ export const AuthProvider = ({ children }) => {
 
       if (token && userData) {
         try {
-          setUser(JSON.parse(userData));
+          const parsedUser = JSON.parse(userData);
+          console.log('📦 Initial user from localStorage:', parsedUser);
+          setUser(parsedUser);
         } catch (error) {
           console.error('Error parsing user data:', error);
           localStorage.removeItem('token');
@@ -35,26 +37,24 @@ export const AuthProvider = ({ children }) => {
     initAuth();
   }, []);
 
- const login = async (email, password, role = null) => {
-  try {
-    console.log('🔐 Frontend: Attempting login:', { email, role });
-    
-    const { data } = await api.post('/auth/login', { email, password, role });
-    
-    console. log('✅ Frontend: Login response:', data);
-    
-    localStorage.setItem('token', data. token);
-    localStorage.setItem('user', JSON.stringify(data));
-    setUser(data);
-    
-    console.log('✅ Frontend: User set in state:', data);
-    
-    return data;
-  } catch (error) {
-    console.error('❌ Frontend: Login error:', error. response?.data);
-    throw error. response?.data?.message || 'Login failed';
-  }
-};
+  const login = async (email, password, role = null) => {
+    try {
+      console.log('🔐 Frontend: Attempting login:', { email, role });
+      
+      const { data } = await api.post('/auth/login', { email, password, role });
+      
+      console.log('✅ Frontend: Login response:', data);
+      
+      localStorage.setItem('token', data. token);
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
+      
+      return data;
+    } catch (error) {
+      console.error('❌ Frontend: Login error:', error. response?.data);
+      throw error. response?.data?. message || 'Login failed';
+    }
+  };
 
   const signup = async (formData) => {
     try {
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data. token);
       localStorage.setItem('user', JSON.stringify(data));
       setUser(data);
       return data;
@@ -84,6 +84,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ Update user function
+  const updateUser = (updatedData) => {
+    console.log('🔄 updateUser called with:', updatedData);
+    
+    // Merge with existing user data
+    const updatedUser = { ...user, ... updatedData };
+    
+    console.log('✅ New user state:', updatedUser);
+    
+    // Update state
+    setUser(updatedUser);
+    
+    // Update localStorage
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    
+    console.log('💾 Saved to localStorage');
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -98,7 +116,8 @@ export const AuthProvider = ({ children }) => {
     signup,
     register,
     logout,
-    isAdmin: user?. role === 'admin',
+    updateUser,
+    isAdmin: user?.role === 'admin',
     isInstructor: user?.role === 'instructor',
   };
 

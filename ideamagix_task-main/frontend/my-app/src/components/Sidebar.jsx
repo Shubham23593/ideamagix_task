@@ -11,7 +11,6 @@ import {
   FiLogOut,
   FiX
 } from 'react-icons/fi';
-import { useState } from 'react';
 
 const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
   const location = useLocation();
@@ -54,7 +53,7 @@ const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
       className="w-64 min-h-screen flex flex-col border-r-2 shadow-lg transition-all duration-300"
       style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E0E0' }}
     >
-      {/* Logo Section */}
+      {/* Logo Header */}
       <div
         className="p-4 sm:p-6 border-b-2 flex items-center justify-between"
         style={{ borderColor: '#E5E0E0' }}
@@ -62,7 +61,6 @@ const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
         <h1 className="text-2xl sm:text-3xl font-bold" style={{ color: '#3B2F2F' }}>
           Scheduler
         </h1>
-        {/* Close button for mobile (when sidebar is overlay) */}
         <button
           onClick={onClose}
           className="md:hidden p-2 rounded-lg transition-all"
@@ -107,7 +105,7 @@ const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
         })}
       </nav>
 
-      {/* User Info Section */}
+      {/* User Info & Logout */}
       <div
         className="p-3 sm:p-4 border-t-2 space-y-3"
         style={{ borderColor: '#E5E0E0' }}
@@ -117,12 +115,20 @@ const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
           className="flex items-center gap-3 p-3 rounded-lg"
           style={{ backgroundColor: '#F3F0F0' }}
         >
-          <div
-            className="h-10 w-10 sm:h-12 sm:w-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base flex-shrink-0"
-            style={{ backgroundColor: '#3B2F2F' }}
-          >
-            {user?.name?.charAt(0).toUpperCase()}
-          </div>
+          {user?.profilePicture ? (
+            <img
+              src={user.profilePicture}
+              alt={user.name}
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover flex-shrink-0"
+            />
+          ) : (
+            <div
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base flex-shrink-0"
+              style={{ backgroundColor: '#3B2F2F' }}
+            >
+              {user?.name?.charAt(0).toUpperCase()}
+            </div>
+          )}
           <div className="flex-1 min-w-0">
             <p
               className="text-xs sm:text-sm font-bold truncate"

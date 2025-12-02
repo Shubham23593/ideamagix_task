@@ -44,7 +44,7 @@ const CourseList = () => {
           <div
             className="animate-spin rounded-full h-16 w-16 border-4 border-t-4"
             style={{ borderColor: '#E5E0E0', borderTopColor: '#3B2F2F' }}
-          ></div>
+          />
         </div>
       </DashboardLayout>
     );
@@ -66,10 +66,10 @@ const CourseList = () => {
         </div>
         <Link
           to="/admin/courses/add"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-bold text-white text-sm md:text-base transition-all hover:shadow-md"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-bold text-white text-sm md:text-base transition-all hover:shadow-md flex-shrink-0"
           style={{ backgroundColor: '#3B2F2F' }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
         >
           <FiPlus size={18} />
           <span>Add New Course</span>
@@ -84,16 +84,18 @@ const CourseList = () => {
             return (
               <div
                 key={course._id}
-                className="rounded-xl border-2 shadow-sm overflow-hidden flex flex-col h-full hover:shadow-lg transition-all"
+                className="rounded-xl border-2 shadow-sm overflow-hidden flex flex-col h-full hover:shadow-lg transition-all group"
                 style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E0E0' }}
               >
                 {/* Image */}
                 {course.image && (
-                  <img
-                    src={course.image}
-                    alt={course.name}
-                    className="w-full h-40 md:h-44 object-cover"
-                  />
+                  <div className="h-40 md:h-44 overflow-hidden">
+                    <img
+                      src={course.image}
+                      alt={course.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                 )}
 
                 {/* Body */}
@@ -108,7 +110,7 @@ const CourseList = () => {
                         {course.level}
                       </span>
                       <h3
-                        className="text-base md:text-lg font-bold truncate"
+                        className="text-base md:text-lg font-bold truncate leading-tight"
                         style={{ color: '#3B2F2F' }}
                       >
                         {course.name}
@@ -121,16 +123,16 @@ const CourseList = () => {
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs md:text-sm text-gray-600 mb-4 line-clamp-2">
+                  <p className="text-xs md:text-sm text-gray-600 mb-4 line-clamp-2 flex-grow">
                     {course.description}
                   </p>
 
                   {/* Footer Actions */}
-                  <div className="mt-auto flex flex-col gap-2">
+                  <div className="mt-auto space-y-2">
                     <div className="flex gap-2">
                       <Link
                         to={`/admin/courses/${course._id}`}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all hover:shadow-md"
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all hover:shadow-md hover:scale-[1.02]"
                         style={{ backgroundColor: '#F3F0F0', color: '#3B2F2F' }}
                       >
                         <FiEdit size={14} />
@@ -138,7 +140,7 @@ const CourseList = () => {
                       </Link>
                       <Link
                         to={`/admin/courses/${course._id}`}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all hover:shadow-md"
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all hover:shadow-md hover:scale-[1.02]"
                         style={{ backgroundColor: '#F3F0F0', color: '#3B2F2F' }}
                       >
                         <FiCalendar size={14} />
@@ -147,10 +149,10 @@ const CourseList = () => {
                     </div>
                     <Link
                       to={`/admin/courses/${course._id}/add-lecture`}
-                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all hover:shadow-md"
+                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs md:text-sm font-bold transition-all hover:shadow-lg hover:scale-[1.02]"
                       style={{ backgroundColor: '#3B2F2F', color: '#FFFFFF' }}
-                      onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
-                      onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+                      onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+                      onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                     >
                       <FiUsers size={14} />
                       <span>Assign Lecture</span>
@@ -179,10 +181,10 @@ const CourseList = () => {
           </p>
           <Link
             to="/admin/courses/add"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-bold text-white text-sm md:text-base transition-all hover:shadow-md"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-bold text-white text-sm md:text-base transition-all hover:shadow-lg hover:scale-[1.02]"
             style={{ backgroundColor: '#3B2F2F' }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
           >
             <FiPlus size={18} />
             <span>Add Course</span>

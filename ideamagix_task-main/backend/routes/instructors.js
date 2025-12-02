@@ -16,7 +16,7 @@ router.route('/')
 
 router.route('/:id')
   .get(protect, getInstructor)
-  .put(protect, admin, updateInstructor)
+  .put(protect, updateInstructor) // ✅ REMOVED admin middleware - now instructors can update their own profile
   .delete(protect, admin, deleteInstructor);
 
 export default router;
