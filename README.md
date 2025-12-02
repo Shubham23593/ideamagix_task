@@ -1,11 +1,11 @@
 # IDEAMAGIX TASK - Online Lecture Scheduling System
 
-![React](https://img.shields.io/badge/React-19. x-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![JavaScript](https://img.shields. io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Express](https://img.shields.io/badge/Express-4.x-000000?style=for-the-badge&logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-8.x-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Vite](https://img.shields. io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
 A comprehensive, enterprise-grade lecture scheduling and management platform built with React 19, JavaScript, Express, and MongoDB. This full-stack solution delivers seamless course management experiences with advanced features including role-based access control, real-time lecture scheduling, intelligent admin dashboard, instructor profile management with image upload, batch management, and automated date-based filtering for modern educational institutions.
 
@@ -289,9 +289,9 @@ Request to Protected Endpoint
 
 ### Prerequisites
 
-![Node.js](https://img. shields.io/badge/Node. js-18%2B-339933?style=flat-square&logo=node.js&logoColor=white)
-![npm](https://img.shields.io/badge/npm-9%2B-CB3837? style=flat-square&logo=npm&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-8%2B-47A248? style=flat-square&logo=mongodb&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js&logoColor=white)
+![npm](https://img.shields.io/badge/npm-9%2B-CB3837?style=flat-square&logo=npm&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-8%2B-47A248?style=flat-square&logo=mongodb&logoColor=white)
 
 Before you begin, make sure you have the following installed:
 
@@ -300,18 +300,18 @@ Before you begin, make sure you have the following installed:
   - Choose the LTS (Long Term Support) version
   
 - **MongoDB Atlas Account** - Cloud database
-  - Go to: [https://www.mongodb.com/cloud/atlas/register](https://www.mongodb. com/cloud/atlas/register)
+  - Go to: [https://www.mongodb.com/cloud/atlas/register](https://www.mongodb.com/cloud/atlas/register)
   - Create a free account and cluster
   
 - **Git** - Version control
-  - Download from: [https://git-scm.com/downloads](https://git-scm. com/downloads)
+  - Download from: [https://git-scm.com/downloads](https://git-scm.com/downloads)
 
 ### Installation Guide
 
 #### Step 1: Clone the Repository
 
 ```bash
-git clone https://github. com/Shubham23593/ideamagix_task.git
+git clone https://github.com/Shubham23593/ideamagix_task.git
 cd ideamagix_task
 cd ideamagix_task-main
 ```
@@ -376,7 +376,7 @@ You should see:
 ```
 ✅ Server running in development mode on port 5000
 📡 CORS enabled for: http://localhost:5173
-MongoDB Connected: cluster0-xxxxx. mongodb.net
+MongoDB Connected: cluster0-xxxxx.mongodb.net
 ```
 
 #### Start Frontend Server
@@ -417,11 +417,11 @@ npm run seed
 
 👨‍🏫 Instructor 1:
 📧 Email: instructor1@gmail.com
-🔑 Password: instructor1
+🔑 Password: instructor123
 
 👨‍🏫 Instructor 2:
-📧 Email: instructor2@gmail. com
-🔑 Password: instructor2
+📧 Email: instructor2@gmail.com
+🔑 Password: instructor123
 ```
 
 ## Project Structure
@@ -665,7 +665,7 @@ This project is open source and available under the MIT License.
 
 ---
 
-**🌐 Try it live:** [IDEAMAGIX TASK](https://ideamagixtask. netlify.app)
+**🌐 Try it live:** [IDEAMAGIX TASK](https://ideamagixtask.netlify.app)
 
 **⭐ Star this repository** if you find it helpful!
 
