@@ -42,8 +42,9 @@ const AdminLogin = () => {
       style={{ backgroundColor: '#F5F5F5' }}
     >
       <ToastContainer position="top-right" autoClose={3000} theme="light" />
-      
+
       <div className="max-w-md w-full">
+
         {/* Back Button */}
         <Link
           to="/"
@@ -54,7 +55,7 @@ const AdminLogin = () => {
           <span className="font-semibold text-sm">Back to Home</span>
         </Link>
 
-        {/* Header Section */}
+        {/* Header */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <div
@@ -73,9 +74,13 @@ const AdminLogin = () => {
         </div>
 
         {/* Login Form Card */}
-        <div className="rounded-xl border-2 shadow-md overflow-hidden p-6 md:p-8" style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E0E0' }}>
+        <div
+          className="rounded-xl border-2 shadow-md overflow-hidden p-6 md:p-8"
+          style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E0E0' }}
+        >
           <form className="space-y-5" onSubmit={handleSubmit}>
-            {/* Email Field */}
+
+            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -85,29 +90,21 @@ const AdminLogin = () => {
                 Email Address
               </label>
               <div className="relative">
-                <FiMail
-                  className="absolute left-3 top-3.5 text-gray-400"
-                  size={18}
-                />
+                <FiMail className="absolute left-3 top-3.5 text-gray-400" size={18} />
                 <input
                   id="email"
                   type="email"
                   required
-                  className="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-colors text-sm md:text-base"
-                  style={{
-                    borderColor: '#E5E0E0',
-                    color: '#3B2F2F',
-                  }}
+                  className="w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-colors"
+                  style={{ borderColor: '#E5E0E0', color: '#3B2F2F' }}
                   placeholder="admin@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  onFocus={(e) => (e.target.style.borderColor = '#3B2F2F')}
-                  onBlur={(e) => (e.target.style.borderColor = '#E5E0E0')}
                 />
               </div>
             </div>
 
-            {/* Password Field */}
+            {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -117,29 +114,21 @@ const AdminLogin = () => {
                 Password
               </label>
               <div className="relative">
-                <FiLock
-                  className="absolute left-3 top-3.5 text-gray-400"
-                  size={18}
-                />
+                <FiLock className="absolute left-3 top-3.5 text-gray-400" size={18} />
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   required
-                  className="w-full pl-10 pr-12 py-3 border-2 rounded-lg focus:outline-none transition-colors text-sm md:text-base"
-                  style={{
-                    borderColor: '#E5E0E0',
-                    color: '#3B2F2F',
-                  }}
+                  className="w-full pl-10 pr-12 py-3 border-2 rounded-lg focus:outline-none transition-colors"
+                  style={{ borderColor: '#E5E0E0', color: '#3B2F2F' }}
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  onFocus={(e) => (e.target.style.borderColor = '#3B2F2F')}
-                  onBlur={(e) => (e.target.style.borderColor = '#E5E0E0')}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600 transition-colors"
+                  className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600"
                 >
                   {showPassword ? <FiEyeSlash size={18} /> : <FiEye size={18} />}
                 </button>
@@ -150,96 +139,41 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 rounded-lg font-bold text-white text-sm md:text-base transition-all hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full py-3 px-4 rounded-lg font-bold text-white"
               style={{ backgroundColor: loading ? '#999999' : '#3B2F2F' }}
-              onMouseEnter={(e) => {
-                if (!loading) e.target.style.opacity = '0.9';
-              }}
-              onMouseLeave={(e) => {
-                if (!loading) e.target.style.opacity = '1';
-              }}
             >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                    ircle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      fill="none"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                  Signing in...
-                </span>
-              ) : (
-                'Login to Admin Panel'
-              )}
+              {loading ? 'Signing in...' : 'Login to Admin Panel'}
             </button>
           </form>
 
-          {/* Divider */}
+          {/* OR Divider */}
           <div className="mt-6 flex items-center gap-3">
             <div style={{ flex: 1, height: '1px', backgroundColor: '#E5E0E0' }}></div>
             <span className="text-xs text-gray-500">OR</span>
             <div style={{ flex: 1, height: '1px', backgroundColor: '#E5E0E0' }}></div>
           </div>
 
-          {/* Switch Role Link */}
+          {/* Switch Role */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Not an admin?{' '}
               <Link
                 to="/instructor-login"
-                className="font-bold transition-colors"
+                className="font-bold"
                 style={{ color: '#3B2F2F' }}
-                onMouseEnter={(e) => (e.target.style.opacity = '0.7')}
-                onMouseLeave={(e) => (e.target.style.opacity = '1')}
               >
                 Login as Instructor
               </Link>
             </p>
           </div>
-
-          {/* Demo Credentials */}
-          <div className="mt-6 pt-6 border-t-2" style={{ borderColor: '#E5E0E0' }}>
-            <p className="text-xs font-bold text-gray-600 mb-3" style={{ color: '#3B2F2F' }}>
-              🔐 Demo Credentials:
-            </p>
-            <div className="rounded-lg p-4 space-y-2" style={{ backgroundColor: '#FAFAF9' }}>
-              <div className="text-xs">
-                <span className="font-bold text-gray-700">Email:</span>
-                de
-                  className="ml-2 px-2 py-1 rounded text-xs font-mono"
-                  style={{ backgroundColor: '#F3F0F0', color: '#3B2F2F' }}
-                >
-                  admin@example.com
-                </code>
-              </div>
-              <div className="text-xs">
-                <span className="font-bold text-gray-700">Password:</span>
-                de
-                  className="ml-2 px-2 py-1 rounded text-xs font-mono"
-                  style={{ backgroundColor: '#F3F0F0', color: '#3B2F2F' }}
-                >
-                  admin123
-                </code>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
-        {/* Footer Info */}
+        {/* Footer */}
         <p className="text-center text-xs text-gray-500 mt-6">
           🔒 Your credentials are secure and encrypted
         </p>
+
       </div>
     </div>
   );
