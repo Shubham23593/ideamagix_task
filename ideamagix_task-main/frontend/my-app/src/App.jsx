@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+  import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Loader from './components/Loader';
@@ -14,6 +14,8 @@ import CourseList from './pages/CourseList';
 import AddCourse from './pages/AddCourse';
 import CourseDetail from './pages/CourseDetail';
 import AddLecture from './pages/AddLecture';
+import AssignLecture from './pages/AssignLecture';
+import AllLectures from './pages/AllLectures';
 
 function App() {
   const { user, loading } = useAuth();
@@ -29,7 +31,7 @@ function App() {
         <Route 
           path="/" 
           element={
-            user ? (
+            user ?  (
               user.role === 'admin' ?  (
                 <Navigate to="/admin" replace />
               ) : (
@@ -87,6 +89,22 @@ function App() {
           element={
             <ProtectedRoute requiredRole="admin">
               <InstructorList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/lectures"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AssignLecture />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/all-lectures"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AllLectures />
             </ProtectedRoute>
           }
         />
